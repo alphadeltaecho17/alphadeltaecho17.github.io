@@ -216,10 +216,16 @@
  			clearInterval(att);
 	 		obj.remove();
 	 		attack_status=0;
-
+	 		if(hp_enemy<=0){
+	 			disappear(enemy);
+	 		}
  		}
  	}
  	
+ }
+
+ function disappear(obj){
+ 	obj.remove();
  }
 
 
