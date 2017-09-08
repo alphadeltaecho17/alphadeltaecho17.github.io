@@ -29,6 +29,35 @@
 		bottom: 50px;
 		left: 50px;
 	}
+	.control{
+		position: fixed;
+		bottom: 50px;
+		right: 50px;
+	}
+	.control img{
+		position: absolute;
+		width: 80px;
+	}
+	#up{
+		right: 130px;
+    	bottom: 122px;
+	}
+	#down{
+	    right: 130px;
+	    transform: rotate(180deg);
+	    bottom: -19px;
+	}
+	#left{
+		right: 210px;
+	    bottom: 50px;
+	    transform: rotate(270deg);
+	}
+	#right{
+		bottom: 50px;
+		right: 50px;
+		transform: rotate(90deg);
+	}
+
 	@media (min-width: 500px){
 		/*#field{
 			transform: rotate(90deg);
@@ -40,6 +69,12 @@
 <img src="char.png" width="100" height="auto" id="char">
 
 <img src="att-btn.png" width="100" height="auto" id="att-btn" onclick="buttonAttack();">
+<div class="control">
+	<img src="arah.png" width="50" id="up" onclick="moveUp()" >
+	<img src="arah.png" width="50" id="down" onclick="moveDown()" >
+	<img src="arah.png" width="50" id="left" onclick="moveLeft()" >
+	<img src="arah.png" width="50" id="right" onclick="moveRight()" >
+</div>
 
 </section>
 <script src="assets/js/jquery.min.js"></script>
