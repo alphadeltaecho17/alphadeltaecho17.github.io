@@ -1,0 +1,40 @@
+a.navbar-brand.navbar-link{
+}
+
+div#article-content.container{
+  padding-left:16%;
+}
+
+nav.navbar.navbar-default{
+  background:#00A885;
+  padding:10px;
+}
+
+a.navbar-brand.navbar-link{
+  color:white;
+  font-size:28px;
+  font-weight:600;
+}
+
+div.navbar-header{
+  margin-left:calc(50% - 100px) !important;
+}
+
+hr{
+}
+
+hr#selector{
+  /*border:1px solid grey;*/
+}
+
+div#content-row.row{
+}
+
+body{
+  /*background-image:url('../img/background2.jpg');*/
+  background-position:left;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+

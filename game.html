@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<style>
+	#field{
+		background-color: #f1f1f1;
+		width: 100%;
+		height:100%;
+		position: fixed;
+		z-index: -1;
+		top: 0;
+		left: 0;
+	}
+	#char{
+		position: fixed;
+		top: 0;
+		left: 0;
+	}
+	.attack{
+		position: fixed;
+		width: 50px;
+		height: auto;
+		display: none;
+	}
+	#att-btn{
+		position: fixed;
+		bottom: 50px;
+		left: 50px;
+	}
+	@media (min-width: 500px){
+		/*#field{
+			transform: rotate(90deg);
+		}*/
+	}
+</style>
+<body>
+<section id="field">
+<img src="char.png" width="100" height="auto" id="char">
+
+<img src="att-btn.png" width="100" height="auto" id="att-btn" onclick="buttonAttack();">
+
+</section>
+<script src="assets/js/jquery.min.js"></script>
+ <script>
+ var speed=10;
+ var range=10;
+ var temp=0;
+ var att=[];
+ var attack_status=0;
+ 
+ var char_side=1;
+ function moveLeft(){
+ 	var obj=document.getElementById('char');
+ 	var left=obj.offsetLeft;
+ 	var move =left-speed;
+ 	document.getElementById('char').style.left=move+'px';
+ 	if(char_side==1){
+ 		obj.style.transform="scaleX(-1)";
+ 		char_side=2;
+ 	}
+ }
+ function moveUp(){
+ 	var obj=document.getElementById('char');
+ 	var top=obj.offsetTop;
+ 	var move =top-speed;
+ 	document.getElementById('char').style.top=move+'px';
+ }
+ function moveRight(){
+ 	var obj=document.getElementById('char');
+ 	var left=obj.offsetLeft;
+ 	var move =left+speed;
+ 	document.getElementById('char').style.left=move+'px';
+ 	if(char_side==2){
+ 		obj.style.transform="scaleX(1)";
+ 		char_side=1;
+ 	}
+ }
+ function moveDown(){
+ 	var obj=document.getElementById('char');
+ 	var top=obj.offsetTop;
+ 	var move =top+speed;
+ 	document.getElementById('char').style.top=move+'px';
+ }
+ function buttonAttack(){
+ 	attack();
+ 	attack_status=1;
+ }
+ function attack(){
+ 	if(attack_status==0){
+ 	 	var att_arrow=$('<img src="arrow.png"  class="attack">');
+ 	 	document.getElementById('field').append(att_arrow[0]);
+ 	 	var obj=document.getElementsByClassName('attack')[0];
+ 	 	var pos=document.getElementById('char');
+ 	 	var left=pos.offsetLeft;
+ 	 	var top=pos.offsetTop;
+ 	 	obj.style.display='block';
+ 	 	obj.style.left=left+'px';
+ 	 	obj.style.top=top+'px';
+ 	 	obj.style.transform="rotate(90deg)";
+ 	 	var arrah=char_side;
+ 	 	arrah.staticVar=char_side;
+ 	 	att[temp]=setInterval(function(){arrow(obj,left,top,temp,char_side);},50);
+ 	 	temp++;
+ 	 }
+ }
+
+ function arrow(obj,x,y,t,arah){
+
+ 	var left=obj.offsetLeft;
+ 	var top=obj.offsetTop;
+ 	var move=0;
+ 	if(arah==1){
+ 	 	move=left+speed;
+ 	}else{
+ 		move=left-speed;
+ 		obj.style.transform='rotate(270deg)';
+ 	}
+ 	obj.style.top=y;
+ 	obj.style.left=move+'px';
+ 	if(move>=x+400){
+ 		clearInterval(att[temp]);
+ 		obj.remove();
+ 		attack_status=0;
+ 	}
+ }
+ // function stop(x,y,obj,t){
+ // 	var left=obj.offsetLeft;
+ // 	if(left>x+100){
+ // 		clearInterval(att[t]);
+ // 	}
+ // }
+
+	
+ 	window.addEventListener('keydown', function(event) {
+	  switch (event.keyCode) {
+	    case 37: // Left
+	      moveLeft();
+	    break;
+
+	    case 38: // Up
+	      moveUp();
+	    break;
+
+	    case 39: // Right
+	      moveRight();
+	    break;
+
+	    case 40: // Down
+	      moveDown();
+	    break;
+	    case 32:
+	    	attack();
+	    	attack_status=1;
+	    break;
+	  }
+	}, false);
+ </script>
+
+</body>
+</html>

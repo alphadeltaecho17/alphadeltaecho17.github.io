@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<style>
+	#field{
+		background-color: #f1f1f1;
+		width: 100%;
+		height:100%;
+		position: fixed;
+		z-index: -1;
+		top: 0;
+		left: 0;
+	}
+	#char{
+		position: fixed;
+		top: 40%;
+		left: 100px;
+	}
+	#enemy{
+		position: fixed;
+		top: 40%;
+		left: 900px;
+	}
+	.attack{
+		position: fixed;
+		width: 50px;
+		height: auto;
+		display: none;
+	}
+	@media (min-width: 500px){
+		/*#field{
+			transform: rotate(90deg);
+		}*/
+	}
+</style>
+<body>
+<section id="field" onclick="coor()">
+<img src="char.png" width="100" height="auto" id="char">
+<img src="enemy.png" width="75" height='auto' id='enemy'>
+
+</section>
+<script src="assets/js/jquery.min.js"></script>
+ <script>
+ var x=0,y=0;
+ var char=document.getElementById('char');
+ var field=document.getElementById('field');
+ 
+
+ 
+ 	function coor(){
+ 		x=event.clientX;
+ 		y=event.clientY;
+ 	}
+ 	function reset(){
+ 		char.style.top='40%';
+ 		char.style.left='100px';
+ 	}
+ 	function attack(){
+ 		char.style.top=y-50+'px';
+ 		char.style.left=x-40+'px';
+ 		fireball();
+ 	}
+ 	function fireball(){
+ 		var fb =$("<img src='fire.png' width='50' height='auto' id='fire' style='position:fixed;transform:rotate(180deg);top:"+y+"px;left:"+x+"px;'>");
+ 		field.append(fb[0]);
+ 	}
+
+ 	window.addEventListener('keydown', function(event) {
+	  switch (event.keyCode) {
+	    case 32: // space
+	      attack();
+	    break;
+
+	    case 65: // a
+	      moveUp();
+	    break;
+
+	    case 83: // s
+	      moveRight();
+	    break;
+
+	  //   case 40: // Down
+	  //     moveDown();
+	  //   break;
+	  //   case 32:
+	  //   	attack();
+	  //   break;
+	  }
+	}, false);
+ 
+ </script>
+
+</body>
+</html>
