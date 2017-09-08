@@ -13,10 +13,21 @@
 		top: 0;
 		left: 0;
 	}
-	#char{
+	.char{
 		position: fixed;
-		top: 0;
-		left: 0;
+		z-index: 2;
+	}
+	.char .hp{
+		margin:0;
+		text-align: center;
+	}
+	.enemy{
+		top: 50%;
+		right: 400px;
+	}
+	.hero{
+		top: 50%;
+		left: 100px;
 	}
 	.attack{
 		position: fixed;
@@ -57,7 +68,11 @@
 		right: 50px;
 		transform: rotate(90deg);
 	}
-  
+	#arrow{
+		z-index: 1;
+	}
+	
+
 	@media (min-width: 500px){
 		/*#field{
 			transform: rotate(90deg);
@@ -66,7 +81,15 @@
 </style>
 <body>
 <section id="field">
-<img src="char.png" width="100" height="auto" id="char">
+<p id='test' style="text-align: center;"></p>
+<div class="char hero" id="hero">
+	<h3 id="hp-hero" class="hp">100</h3>
+	<img src="char.png" width="100" height="auto" id="char"></div>
+<div class="char enemy" id="enemy">
+	<h3 id="hp-enemy" class="hp"></h3>
+	<img src="enemy.png" width="75" height="auto" >
+</div>
+
 
 <img src="att-btn.png" width="100" height="auto" id="att-btn" onclick="buttonAttack();">
 <div class="control">
@@ -84,39 +107,42 @@
  var temp=0;
  var att=[];
  var attack_status=0;
+ var hp_enemy=100;
+ $('#hp-enemy').append(hp_enemy);
+ var ar_r=0;
  
  var char_side=1;
  function moveLeft(){
- 	var obj=document.getElementById('char');
+ 	var obj=document.getElementById('hero');
  	var left=obj.offsetLeft;
  	var move =left-speed;
- 	document.getElementById('char').style.left=move+'px';
+ 	document.getElementById('hero').style.left=move+'px';
  	if(char_side==1){
  		obj.style.transform="scaleX(-1)";
  		char_side=2;
  	}
  }
  function moveUp(){
- 	var obj=document.getElementById('char');
+ 	var obj=document.getElementById('hero');
  	var top=obj.offsetTop;
  	var move =top-speed;
- 	document.getElementById('char').style.top=move+'px';
+ 	document.getElementById('hero').style.top=move+'px';
  }
  function moveRight(){
- 	var obj=document.getElementById('char');
+ 	var obj=document.getElementById('hero');
  	var left=obj.offsetLeft;
  	var move =left+speed;
- 	document.getElementById('char').style.left=move+'px';
+ 	document.getElementById('hero').style.left=move+'px';
  	if(char_side==2){
  		obj.style.transform="scaleX(1)";
  		char_side=1;
  	}
  }
  function moveDown(){
- 	var obj=document.getElementById('char');
+ 	var obj=document.getElementById('hero');
  	var top=obj.offsetTop;
  	var move =top+speed;
- 	document.getElementById('char').style.top=move+'px';
+ 	document.getElementById('hero').style.top=move+'px';
  }
  function buttonAttack(){
  	attack();
@@ -127,45 +153,75 @@
  	 	var att_arrow=$('<img src="arrow.png"  class="attack">');
  	 	document.getElementById('field').append(att_arrow[0]);
  	 	var obj=document.getElementsByClassName('attack')[0];
- 	 	var pos=document.getElementById('char');
+ 	 	var pos=document.getElementById('hero');
  	 	var left=pos.offsetLeft;
  	 	var top=pos.offsetTop;
  	 	obj.style.display='block';
- 	 	obj.style.left=left+'px';
- 	 	obj.style.top=top+'px';
+ 	 	obj.style.left=left+10+'px';
+ 	 	obj.style.top=top+20+'px';
  	 	obj.style.transform="rotate(90deg)";
  	 	var arrah=char_side;
  	 	arrah.staticVar=char_side;
- 	 	att[temp]=setInterval(function(){arrow(obj,left,top,temp,char_side);},50);
+ 	 	att=setInterval(function(){arrow(obj,left,top,temp,char_side);},50);
  	 	temp++;
+ 	 	ar_r=0;
  	 }
  }
 
  function arrow(obj,x,y,t,arah){
-
+ 	if(ar_r==0){
+ 		ar_r= arah;
+ 	}
  	var left=obj.offsetLeft;
  	var top=obj.offsetTop;
  	var move=0;
- 	if(arah==1){
- 	 	move=left+speed;
+ 	var r=x+400;
+ 	if(ar_r==1){
+ 	 	move=left+speed*2;
+ 	 	obj.style.transform='rotate(90deg)';
+ 	 	if(move>=r){
+	 		clearInterval(att);
+	 		obj.remove();
+	 		attack_status=0;
+	 	}
  	}else{
- 		move=left-speed;
+ 		move=left-speed*2;
  		obj.style.transform='rotate(270deg)';
+ 		r=x-400;
+ 		if(move<=r){
+	 		clearInterval(att);
+	 		obj.remove();
+	 		attack_status=0;
+	 	}
  	}
- 	obj.style.top=y;
+ 	obj.style.top=y+'px';
  	obj.style.left=move+'px';
- 	if(move>=x+400){
- 		clearInterval(att[temp]);
- 		obj.remove();
- 		attack_status=0;
- 	}
+ 	
+ 	hit(move,y,obj);
  }
- // function stop(x,y,obj,t){
- // 	var left=obj.offsetLeft;
- // 	if(left>x+100){
- // 		clearInterval(att[t]);
- // 	}
- // }
+
+ function hit(x,y,obj){
+ 	var enemy=document.getElementById('enemy');
+ 	var left=enemy.offsetLeft;
+ 	var top=enemy.offsetTop;
+ 	var sx=enemy.offsetWidth;
+ 	var sy=enemy.offsetHeight;
+ 	var bx=left+sx;
+ 	var by=top+sy;
+ 	$("#test").html(left+'/'+top+'/'+bx+'/'+by+'/'+x+'/'+y);
+ 	if(y>=top&&y<=by){
+ 		if(x>=left&&x<=bx){
+ 			hp_enemy-=10;
+ 			$('#hp-enemy').html(hp_enemy);
+ 			clearInterval(att);
+	 		obj.remove();
+	 		attack_status=0;
+
+ 		}
+ 	}
+ 	
+ }
+
 
 	
  	window.addEventListener('keydown', function(event) {
