@@ -4,33 +4,25 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>mobcom</title>
+    <meta name="theme-color" content="#00a885" />
+    <link rel="shortcut icon" href="assets/img/icon.png" type="image/x-icon">
+    <title>ADE</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 </head>
 <style>
-#list-artikel {
-    list-style: none;
-    padding-left: 0;
-}
-#list-artikel li{
-    /*padding-bottom: 10px;*/
-    /*border-bottom: 1px solid grey;*/
-}
-a{
-    color: black;
-}
-a:hover, a:focus, a:visited{
-    color: #00A885;
-    text-decoration: none !important;
-}
+
+
 
 </style>
 
 <body>
-    <nav class="navbar navbar-default" style="margin-bottom: 0">
+
+    <nav class="navbar navbar-default" style="margin-bottom: 0;border-radius: 0px">
         <div class="container-fluid">
-            <div class="navbar-header"><a class="navbar-brand navbar-link" href="#">AlphaDeltaEcho </a>
+            <div class="navbar-header" style="font-weight: bold;" >AlphaDeltaEcho 
                 <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
             </div>
             <div class="collapse navbar-collapse" id="navcol-1">
@@ -39,44 +31,77 @@ a:hover, a:focus, a:visited{
         </div>
     </nav>
     <div class="container" id="article-content" >
-        <div class="row" id="content-row" style="background-color: white">
-            <div class="col-md-8">
-                <h1>Heading</h1>
-                <hr id="selector">
-                <img src="assets/img/Stronghold-Crusader.jpg" width="100%" height="auto">
-                <p>Paragraph</p>
-                <hr>
-                <p>Paragraph</p><span class="label label-default">Label</span></div>
-            <div class="col-md-4">
-                <h3>Post</h3>
-                    <ul id="list-artikel">
-                       <!--  <li>
-                            <a href="">
-                                <h3>lnawldnaown oabdoi aoib wi awndpwani</h3>
-                            </a>
-                        </li> -->
-                    </ul>
+        <div class="row" id="content-row" >
+            <div class="col-md-2" ></div>
+            <div class="col-md-9" style="background-color: white;">
+
+            <div class="row">
+                <div class="col-md-8" style="padding:10px 20px">
+                    <h1>Stronghold Crusader</h1>
+                    <hr id="selector">
+                    <img src="assets/img/sc.jpg" width="100%" height="auto">
+                    
+                    <hr>
+                    <h3 class="intro"><i>Stronghold Crusader game besutan Firefly Studio yang rilis pada tahun 2002, merupakan sebuah game Real Time Strategy ditambah dengan Economic Building dengan latar peradaban pertengahan</i></h3>
+                    <hr class="gap">
+                    <h3>Tentang Game</h3>
+                    <p></p>
+                    <hr>
+                    <h3>Designer</h3>
+                    <p></p>
+                    <hr>
+                    <h3>Play</h3>
+                    <p></p>
+                    <hr>
+                    <h3>Experiece</h3>
+                    <p></p>
+                    <hr>
+                    <h3>Summay</h3>
+                    <p></p>
+                    <hr>
+                   
+                    
+                    <h4><span class="label label-default label-green">#lecture1</span></h4>
                 </div>
+                    <div class="col-md-4">
+                    <h3 class="head monts"><span>Post</span></h3>
+                        <ul id="list-artikel">
+                           <!--  <li>
+                                <a href="">
+                                    <h3>lnawldnaown oabdoi aoib wi awndpwani</h3>
+                                </a>
+                            </li> -->
+                        </ul>
+                    </div>
+                </div>
+                </div>
+            
         </div>
     </div>
+    <footer class="footer">
+        <h4>Ade Rizky</h4>
+    </footer>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/list-artikel.js"></script>
     <script>
+    // listArtikel('index');
+    // function listArtikel(page){
+    //     var link='php/listArtikel.php';
+    //     $.get(link,{page:page},function(data){
+    //         // var d=JSON.parse(data);
+    //         // alert(data);
+    //         data=JSON.parse(data);
+    //         for (var i = 0; i < data.length; i++) {
+    //             var text=data[i].split('.');
+    //             var h=text[0].substring(0,5)+'...';
+    //             var html='<li><a href="'+data[i]+'"><h3>'+h+'</h3></a></li>';
+    //             $('#list-artikel').append(html);
+    //         }
+    //     });
+    // }
     listArtikel('index');
-    function listArtikel(page){
-        var link='php/listArtikel.php';
-        $.get(link,{page:page},function(data){
-            // var d=JSON.parse(data);
-            // alert(data);
-            data=JSON.parse(data);
-            for (var i = 0; i < data.length; i++) {
-                var text=data[i].split('.');
-                var h=text[0].substring(0,5)+'...';
-                var html='<li><a href="'+data[i]+'"><h3>'+h+'</h3></a></li>';
-                $('#list-artikel').append(html);
-            }
-        });
-    }
+    // alert($("#coba").clone().children().remove().text());
     </script>
 </body>
 
