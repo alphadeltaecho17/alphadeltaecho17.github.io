@@ -74,6 +74,8 @@ a:hover, a:focus, a:visited{
 .footer{
     background: #f3f3f3;
     padding: 10px;
+    position: absolute;
+    width: 100%;
     /*margin-top: 50px;*/
 }
 .footer h4{

@@ -1,4 +1,4 @@
-var list=['Trailer Game','index'];
+var list=['review game','index', 'review promo game'];
 function listArtikel(page){
 	for (var i = 0; i < list.length; i++) {
 		if(list[i]!=page){
@@ -11,3 +11,13 @@ function listArtikel(page){
     	}
     }
 }
+
+var body = document.body,
+    html = document.documentElement;
+
+var height = Math.max( body.scrollHeight, body.offsetHeight, 
+                       html.clientHeight, html.scrollHeight, html.offsetHeight );
+var h=height-60;
+var ch=height-140;
+$('footer').attr('style','top:'+h+'px');
+$('#content').attr('style','height:'+ch+'px');
