@@ -20,4 +20,4 @@ var height = Math.max( body.scrollHeight, body.offsetHeight,
 var h=height-60;
 var ch=height-140;
 $('footer').attr('style','top:'+h+'px');
-$('#content').attr('style','height:'+ch+'px');
+// $('#content').attr('style','height:'+ch+'px');
