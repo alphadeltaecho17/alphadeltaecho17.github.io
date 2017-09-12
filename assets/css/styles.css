@@ -17,7 +17,7 @@ nav.navbar.navbar-default{
 }
 
 div.navbar-header{
-  margin-left:calc(50% - 200px) !important;
+  margin-left:calc(50% - 50px) !important;
 }
 
 hr{
